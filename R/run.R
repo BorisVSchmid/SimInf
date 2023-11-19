@@ -61,6 +61,7 @@ compile_model <- function(model, key) {
     ## Set PKG_CPPFLAGS
     pkg_cppflags <- Sys.getenv("PKG_CPPFLAGS", unset = NA)
     Sys.setenv(PKG_CPPFLAGS = paste0("-I", shQuote(include),
+                                     " -Wno-unused-variable",        ## Added to allow for unused variables in the pts_fun. As we are building a framework, sometimes we have variables that are not used.
                                      " -DSIMINF_MODEL_RUN=", run_fn,
                                      " -DSIMINF_R_INIT=R_init_", name,
                                      " -DSIMINF_FORCE_SYMBOLS=FALSE"))
